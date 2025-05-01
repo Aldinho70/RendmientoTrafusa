@@ -1,4 +1,4 @@
-export const TOKEN = "733a7307cd0dd55c139f57fcaa9269d3686C2000651F8B1F06E56BFFCFC37C2656113BC6";
+export const TOKEN = "fa54a97c1348167613707146e3ce1c2163C874116C8222C592D6EF7CB721C8F09EB9A4C9";
 export const CDN = "https://hst-api.wialon.com";
 
 /* configuracion de sensores y parametros necesarios para  */
@@ -79,6 +79,6 @@ export const Footer = {
  */
 
 /**
- * USUARIO: DEVCUENTADEMO
- * CONTRASEÑA: Devcdemo-2024
+ * USUARIO: DASHCOMB TRAFUSA
+ * CONTRASEÑA: Dash-2025
  */
