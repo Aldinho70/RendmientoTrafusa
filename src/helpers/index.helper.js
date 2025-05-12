@@ -50,36 +50,45 @@ class index_helper {
             const unit_messages = await messageService.loadMessages();
             const unit_data = await messageService.getInfoUnit(unit);
             const name = unit_data.getName();
+            const sensors = unit_data.getSensors();
+            const sensor_fuel = unit_data.getSensor(params.combustible[name].id);
+            const sensor_fuel_usage = unit_data.getSensor(params.combustible_usado[name].id);
+            
+            console.log( sensors );
             // console.log( unit_data.getName(), unit_messages );
 
             const { messages, count } = unit_messages;
 
             if (messages.length > 0) {
-                console.log(messages);
+                // console.log(messages);
 
                 const coordinates = [];
                 const speeds = [];
                 const combustibles = [];
-
+                let combustible_usage;
+                
                 messages.map(element => {
+                    
                     const {
                         t: timestamp = 0,   
                         pos: posicion = {},     
                         p: parametros = {}  
                     } = element;
-                
+                    
                     const {
                         x: longitud = 0,
                         y: latitud = 0,
                         s: speed = 0
                     } = posicion || {}; 
-
-                    const combustible = Utils.getValueParams( parametros, params, name );
                     
-                    if( combustible !== null ){
-                        combustibles.push( Math.round(combustible) );                        
+                    const combustible = unit_data.calculateSensorValue(sensor_fuel, element);
+                    
+                    if( combustible != -348201.3876){
+                        combustibles.push(Math.round(combustible))
                     }
-                    
+
+                    combustible_usage = (unit_data.calculateSensorValue(sensor_fuel_usage, element) != -348201.3876 ) && unit_data.calculateSensorValue(sensor_fuel_usage, element) ;
+
                     if (latitud && longitud) {
                         coordinates.push([latitud, longitud]);
                     }
@@ -100,6 +109,7 @@ class index_helper {
                 
                 const start_combustible = combustibles[0];
                 const end_combustible = combustibles[combustibles.length - 1];
+
                 const {
                     t: start,
                 } = messages[0];
@@ -113,21 +123,17 @@ class index_helper {
                 this.generateHTMLInfo(`${(end_combustible)} Litros`, '#consumoFinal');
                 
                 const elapsedTime = Timestamp.getElapsedTime(start, end);
-                // console.log(`Tiempo transcurrido: ${elapsedTime.formatted}`);
                 this.generateHTMLInfo(elapsedTime.formatted, '#tiempoViaje');
                 
                 const totalKm = Haversine.calculateDistanceByLatLong(coordinates);
-                // console.log(`Distancia total recorrida: ${totalKm} km`);
                 this.generateHTMLInfo(`${totalKm}KM`, '#kmRecorridos');
 
-                this.generateHTMLInfo(`${Performance.calcularCombustible(combustibles)} Litros`, '#combustible_consumido');
+                this.generateHTMLInfo(`${combustible_usage} Litros`, '#combustible_consumido');
 
-                // const rendimiento = Performance.calcularRendimiento(totalKm, (start_combustible), (end_combustible));
-                const rendimiento = Performance.calcularRendimiento(totalKm, combustibles);
+                const rendimiento = Performance.calcularRendimiento(totalKm, combustible_usage);
+                console.log( rendimiento );
                 
-                // console.log(`Rendimiento del combustible: ${rendimiento.toFixed(2)} km/l`);
-                this.generateHTMLInfo(`${rendimiento.toFixed(1)*10} km/l`, '#rendimiento');
-
+                this.generateHTMLInfo(`${rendimiento} km/l`, '#rendimiento');
 
             } else {
                 console.log('No hay mensajes');

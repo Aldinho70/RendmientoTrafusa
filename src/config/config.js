@@ -3,42 +3,20 @@ export const CDN = "https://hst-api.wialon.com";
 
 /* configuracion de sensores y parametros necesarios para  */
 export const params = {
-    /* test */
         combustible: {
-            adc1:{
-                device: 'noNameDevice',
-                equation: function (value) {
-                    return ( value/ 1000 ) * 280;
-                },
+            "TFS - 109":{
+                name: 'Combustible Total',
+                type: 'fuel level',
+                id: 34,
                 units: ['GAFI 679 GAS']
             },
-            m_asgn1_raw: {
-                device: 'noNameDevice',
-                equation: function (value) {
-                    const ConvString = value.toString();
-                    const FirstTwo = ConvString.substring(0, 2);
-                    const hexToDecimal = parseInt(FirstTwo, 16);
-                    const Porcentaje = (hexToDecimal * 100) / 255
-                    return (Porcentaje/100) * 197
-                },
-                units: ['GAFI 679 OBD']
-            },
-            SensL: {
-                device: 'noNameDevice',
-                equation: function (value) {
-                    return `El valor del sensor es: ${value}`;
-                }
-            },
-            can_fuel_level_p: {
-                device: 'noNameDevice',
-                equation: function (value) {
-                    const capacidadTotalLitros = 45;
-                    return (value / 100) * capacidadTotalLitros;
-                },                
-                units: ['GAFI - 516']
-            }
         },
-    /* test */
+        combustible_usado: {
+            "TFS - 109":{
+                name: 'Combustible utilizado',
+                id: 27,                
+            },
+        },
 
     odometer: ['odometer']
 }
