@@ -36,8 +36,6 @@ class utils {
     
         return resultados;
     }
-    
-    
 }
 
 export default new utils();

@@ -3,20 +3,84 @@ export const CDN = "https://hst-api.wialon.com";
 
 /* configuracion de sensores y parametros necesarios para  */
 export const params = {
-        combustible: {
-            "TFS - 109":{
-                name: 'Combustible Total',
-                type: 'fuel level',
-                id: 34,
-                units: ['GAFI 679 GAS']
-            },
+    combustible: {
+        "TFS - 109": {
+            name: 'Combustible Total',
+            type: 'fuel level',
+            id: 34,
         },
-        combustible_usado: {
-            "TFS - 109":{
-                name: 'Combustible utilizado',
-                id: 27,                
-            },
+        "TFS - 26": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 34,
         },
+        "TFS - 31": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 28,
+        },
+        "TFS - 47": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 28,
+        },
+        "TFS - 49": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 28,
+        },
+        "TFS - 108": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 28,
+        },
+        "TFS - 109": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 34,
+        },
+        "TFS - 24": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 9,
+        },
+        "TFS - 25": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 8,
+        },
+        "TFS - 104": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 10,
+        },
+        "TFS - 105": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 10,
+        },
+        "TFS - 106": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 10,
+        },
+        "TFS - 107": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 10,
+        },
+        "TFS - 110": {
+            name: 'COMBUSTIBLE TOTAL',
+            type: 'fuel level',
+            id: 2,
+        }
+    },
+    combustible_usado: {
+        "TFS - 109": {
+            name: 'Combustible utilizado',
+            id: 27,
+        },
+    },
 
     odometer: ['odometer']
 }
