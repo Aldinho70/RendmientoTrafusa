@@ -34,7 +34,7 @@ $(document).ready(() => {
                 <div class="card shadow border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Tanque al inicio</h6>
-                        <h4 class="kpis fw-bold" id="consumoInicial">0 Litros</h4>
+                        <h4 class="fw-bold" ><span class="kpis" id="consumoInicial" >0<span/> Litros</h4>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@ $(document).ready(() => {
                 <div class="card shadow border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Tanque al final</h6>
-                        <h4 class="kpis fw-bold" id="consumoFinal">0 Litros</h4>
+                        <h4 class="fw-bold" ><span class="kpis" id="consumoFinal" >0<span/> Litros</h4>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@ $(document).ready(() => {
                 <div class="card shadow border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Rendimiento</h6>
-                        <h4 class="kpis fw-bold text-success" id="rendimiento">0 KM/Litros</h4>
+                        <h4 class="fw-bold text-success" ><span class="kpis" id="rendimiento" >0<span/> KM/Litros</h4>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@ $(document).ready(() => {
                 <div class="card shadow border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Kilómetros Recorridos</h6>
-                        <h4 class="kpis fw-bold text-info" id="kmRecorridos">0 KM</h4>
+                        <h4 class="fw-bold text-info"><span class="kpis" id="kmRecorridos">0<span/> KM</h4>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@ $(document).ready(() => {
                 <div class="card shadow border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Tiempo de Viaje</h6>
-                        <h4 class="kpis fw-bold" id="tiempoViaje">0 Horas</h4>
+                        <h4 class="fw-bold" ><span class="kpis" id="tiempoViaje">0<span/> Horas</h4>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@ $(document).ready(() => {
                 <div class="card shadow border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Velocidad Promedio</h6>
-                        <h4 class="kpis fw-bold text-warning" id="velocidadPromedio">0 KM/H</h4>
+                        <h4 class="fw-bold text-warning" ><span class="kpis" id="velocidadPromedio">0<span/> KM/H</h4>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@ $(document).ready(() => {
                 <div class="card shadow border-0">
                     <div class="card-body">
                         <h6 class="text-muted">Combustible consumido</h6>
-                        <h4 class="kpis fw-bold text-danger" id="combustible_consumido">0 Litros</h4>
+                        <h4 class="fw-bold text-danger" ><span class="kpis" id="combustible_consumido">0<span/> Litros</h4>
                     </div>
                 </div>
             </div>

@@ -106,9 +106,12 @@ class index_helper {
 
             if (sensor_fuel === 0) {
                 alert('Unidad sin datos de combustible');
-                this.generateHTMLInfo(`N/D`, '.kpis');
+                this.generateHTMLInfo(`0`, '.kpis');
             } else {
-                
+                if( !combustible_usage ){
+                    combustible_usage = (Performance.calcularConsumoReal(combustibles) / 10);
+                }
+
                 const {
                     t: start,
                 } = messages[0];
@@ -125,12 +128,15 @@ class index_helper {
                     const end_combustible = combustibles[combustibles.length - 1];
                     this.generateHTMLInfo(`${(end_combustible)} Litros`, '#consumoFinal');
     
-                    Highcharts.initChart({ start_combustible, end_combustible });
+                    Highcharts.initChartLine({ start_combustible, end_combustible });
 
-                    this.generateHTMLInfo(`${combustible_usage} Litros`, '#combustible_consumido');
+                    this.generateHTMLInfo(`${Math.round(combustible_usage)} Litros`, '#combustible_consumido');
     
-                    const rendimiento = Performance.calcularRendimiento(totalKm, combustible_usage);
-                    this.generateHTMLInfo(`${rendimiento} km/l`, '#rendimiento');
+                    const totalKm = Haversine.calculateDistanceByLatLong(coordinates);                
+                    this.generateHTMLInfo(`${Math.round(totalKm)}KM`, '#kmRecorridos');
+
+                    const rendimiento = Performance.calcularRendimiento(Math.round(totalKm), Math.round(combustible_usage));
+                    this.generateHTMLInfo(`${rendimiento.toFixed(2)} km/l`, '#rendimiento');
                 }else{
                     alert(`Error de lectura de sensor ${sensor_fuel.n}`);
                 }
@@ -141,8 +147,6 @@ class index_helper {
                 const promedio = Speed.calcularPromedioVelocidad(speeds);
                 this.generateHTMLInfo(`${promedio.toFixed(2)} Km/h`, '#velocidadPromedio');
 
-                const totalKm = Haversine.calculateDistanceByLatLong(coordinates);
-                this.generateHTMLInfo(`${totalKm}KM`, '#kmRecorridos');
 
             }
         } else {
