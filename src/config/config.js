@@ -88,7 +88,7 @@ export const params = {
 /* Configuraciones del componente Navbar */
 export const Navbar = {
     brand: 'Rendimiento de combustible',
-    img_brand: './src/img/' + 'asmex2.png', /* brand principal */
+    img_brand: './src/img/' + 'TicsaTrafusa_logo.png', /* brand principal */
     img_brand_2: './src/img/' + 'logojd.png',/* brand secundario */
     items: [
         { label: 'Dashboard', icon: 'fas fa-tachometer-alt', to: '/dashboard' },
