@@ -88,7 +88,17 @@ class index_helper {
                 const combustible = unit_data.calculateSensorValue(sensor_fuel, element);
 
                 if (combustible != -348201.3876) {
-                    combustibles.push(Math.round(combustible))
+                    const time = new Date(element.t * 1000).toLocaleTimeString('es-MX', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                    })
+                    combustibles.push({
+                            'timestamp': element.t,
+                            'hour': time,
+                            'fuel':Math.round(combustible)
+                        }
+                    )
                 }
 
                 combustible_usage = (unit_data.calculateSensorValue(sensor_fuel_usage, element) != -348201.3876) && unit_data.calculateSensorValue(sensor_fuel_usage, element);
@@ -122,13 +132,15 @@ class index_helper {
                 this.generateHTMLInfo(elapsedTime.formatted, '#tiempoViaje');
                 
                 if( combustibles.length ){
-                    const start_combustible = combustibles[0];
+                    console.log( combustibles );
+                    
+                    const start_combustible = combustibles[0].fuel;
                     this.generateHTMLInfo(`${(start_combustible)} Litros`, '#consumoInicial');
                     
-                    const end_combustible = combustibles[combustibles.length - 1];
+                    const end_combustible = combustibles[combustibles.length - 1].fuel;
                     this.generateHTMLInfo(`${(end_combustible)} Litros`, '#consumoFinal');
     
-                    Highcharts.initChartLine({ start_combustible, end_combustible });
+                    Highcharts.initChartLine(combustibles);
 
                     this.generateHTMLInfo(`${Math.round(combustible_usage)} Litros`, '#combustible_consumido');
     

@@ -26,41 +26,77 @@ class Highchart {
         });
     }
 
-    initChartLine(data){
-        Highcharts.chart('graficaConsumo', {
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'Nivel Neto de Combustible en un Día Específico'
-            },
-            xAxis: {
-                type: 'datetime',
-                title: {
-                    text: 'Hora'
-                }
-            },
-            yAxis: {
-                title: {
-                    text: 'Nivel Neto (litros)'
-                }
-            },
-            series: [{
-                name: 'Nivel Neto',
-                data: [
-                    [Date.UTC(2023, 4, 12, 0, 0), 200],
-                    [Date.UTC(2023, 4, 12, 1, 0), 500],
-                    [Date.UTC(2023, 4, 12, 2, 0), 600],
-                    [Date.UTC(2023, 4, 12, 3, 0), 800],
-                    [Date.UTC(2023, 4, 12, 4, 0), 1100],
-                    [Date.UTC(2023, 4, 12, 5, 0), 1300],
-                    [Date.UTC(2023, 4, 12, 6, 0), 1400]
-                ]
-            }]
-        });
+   initChartLine(data) {
+    const transformedData = data.map(item => [
+        item.timestamp * 1000,  // Convertir timestamp a milisegundos
+        item.fuel
+    ]);
+    console.log( transformedData );
     
-    }
+    Highcharts.chart('graficaConsumo', {
+        chart: {
+            zoomType: 'x',  // Habilita zoom horizontal
+            backgroundColor: '#ffffff',
+            borderRadius: 8,
+            spacing: [10, 10, 15, 10],
+        },
+        title: {
+            text: 'Carga y Descarga de Combustible'
+        },
+        subtitle: {
+            text: 'Arrastra en el gráfico para hacer zoom'
+        },
+        xAxis: {
+            type: 'datetime',
+            title: {
+                text: 'Hora'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Cantidad de Combustible (litros)'
+            },
+            min: 0
+        },
+        tooltip: {
+            xDateFormat: '%H:%M:%S',
+            shared: true,
+            valueSuffix: ' litros'
+        },
+        legend: {
+            enabled: true
+        },
+        exporting: {
+            enabled: true  // Botón de exportar imagen, PDF, etc.
+        },
+        credits: {
+            enabled: false  // Quitar marca de agua de Highcharts
+        },
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: true,  // Muestra puntos sobre la línea
+                    radius: 3
+                }
+            }
+        },
+        series: [{
+            name: 'Combustible',
+            data: transformedData,
+            color: '#007bff',
+            lineWidth: 2
+        }],
+        navigator: {
+            enabled: true  // Barra de navegación abajo
+        },
+        scrollbar: {
+            enabled: true  // Scroll horizontal
+        },
+        rangeSelector: {
+            enabled: false  // No se necesita si no usa rangos fijos
+        }
+    });
 }
 
-
+}
 export default new Highchart();
