@@ -11,8 +11,8 @@ class Perfomance {
         let consumo = 0;
 
         for (let i = 0; i < combustible.length - 1; i++) {
-            let actual = combustible[i];
-            let siguiente = combustible[i + 1];
+            let actual = combustible[i].fuel;
+            let siguiente = combustible[i + 1].fuel;
 
             if (siguiente < actual) {
                 consumo += (actual - siguiente);
