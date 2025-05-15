@@ -6,10 +6,10 @@ class Highchart {
                 type: 'column'
             },
             title: {
-                text: 'Consumo de Combustible'
+                text: 'Carga y descarga de Combustible'
             },
             xAxis: {
-                categories: ['Inicio', 'Fin']
+                categories: ['Consumo', 'Carga']
             },
             yAxis: {
                 title: {
@@ -19,8 +19,8 @@ class Highchart {
             series: [{
                 name: 'Unidad 1',
                 data: [
-                    { y: (data.start_combustible), color: 'green' },
-                    { y: (data.end_combustible), color: 'red' }
+                    { y: (data.consumo), color: 'red' },
+                    { y: (data.carga), color: 'green' }
                 ]
             }]
         });
@@ -31,9 +31,8 @@ class Highchart {
         item.timestamp * 1000,  // Convertir timestamp a milisegundos
         item.fuel_suavizado
     ]);
-    console.log( transformedData );
     
-    Highcharts.chart('graficaConsumo', {
+    Highcharts.chart('graficaComportamiento', {
         chart: {
             zoomType: 'x',  // Habilita zoom horizontal
             backgroundColor: '#ffffff',
@@ -41,7 +40,7 @@ class Highchart {
             spacing: [10, 10, 15, 10],
         },
         title: {
-            text: 'Carga y Descarga de Combustible'
+            text: 'Comportamiento de barra de combustible'
         },
         subtitle: {
             text: 'Arrastra en el gráfico para hacer zoom'

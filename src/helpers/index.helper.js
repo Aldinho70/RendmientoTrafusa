@@ -101,7 +101,7 @@ class index_helper {
                     )
                 }
 
-                combustible_usage = (unit_data.calculateSensorValue(sensor_fuel_usage, element) != -348201.3876) && unit_data.calculateSensorValue(sensor_fuel_usage, element);
+                // combustible_usage = (unit_data.calculateSensorValue(sensor_fuel_usage, element) != -348201.3876) && unit_data.calculateSensorValue(sensor_fuel_usage, element);
 
                 if (latitud && longitud) {
                     coordinates.push([latitud, longitud]);
@@ -116,11 +116,15 @@ class index_helper {
 
             if (sensor_fuel === 0) {
                 Utils.showToast("Unidad sin datos de combustible", "Error", "danger");
-                this.generateHTMLInfo(`0`, '.kpis');
+                this.generateHTMLInfo(`N/D`, '.kpis');
+                Highcharts.initChartLine([]);
+                Highcharts.initChart([]);
             } else {
                 // if( !combustible_usage ){
                     const combustiblesRegulados = Performance.suavizarCombustible( combustibles );
-                    combustible_usage = (Performance.calcularConsumoReal(combustiblesRegulados) / 10);
+                    // combustible_usage = (Performance.calcularConsumoReal(combustiblesRegulados));
+                    const promediocombustibles = Performance.agruparPromediosPorHora(combustibles);
+                    const combustible_usage = Performance.calcularConsumoYCarga(promediocombustibles);
                 // }
 
                 const {
@@ -141,16 +145,21 @@ class index_helper {
                     this.generateHTMLInfo(`${(end_combustible)} Litros`, '#consumoFinal');
     
                     Highcharts.initChartLine(combustiblesRegulados);
+                    Highcharts.initChart(combustible_usage);
 
-                    this.generateHTMLInfo(`${Math.round(combustible_usage)} Litros`, '#combustible_consumido');
+                    this.generateHTMLInfo(`${Math.round(combustible_usage.consumo)} Litros`, '#combustible_consumido');
     
                     const totalKm = Haversine.calculateDistanceByLatLong(coordinates);                
                     this.generateHTMLInfo(`${Math.round(totalKm)}KM`, '#kmRecorridos');
 
-                    const rendimiento = Performance.calcularRendimiento(Math.round(totalKm), Math.round(combustible_usage));
+                    const rendimiento = Performance.calcularRendimiento(Math.round(totalKm), Math.round(combustible_usage.consumo));
                     this.generateHTMLInfo(`${rendimiento.toFixed(2)} km/l`, '#rendimiento');
                 }else{
                     Utils.showToast(`Error de lectura de sensor ${sensor_fuel.n}`, "Error", "danger");
+                    this.generateHTMLInfo(`N/D`, '.kpis');
+                    Highcharts.initChartLine([]);
+                    Highcharts.initChart([]);
+                    Highcharts.initChart([]);
                 }
 
                 const totalStop = Speed.totalStops(speeds);

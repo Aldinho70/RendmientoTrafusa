@@ -19,10 +19,10 @@ $(document).ready(() => {
   Highchart.initChart({ start_combustible: 1, end_combustible: 1 });
 
   $(`#searchButton`).button().click( () => {
-    // const startDate = $(`#startDate`).val();    
-    // const endDate = $(`#endDate`).val();      
-    const startDate = '2025-05-13T23:59'
-    const endDate = '2025-05-14T23:59';      
+    const startDate = $(`#startDate`).val();    
+    const endDate = $(`#endDate`).val();      
+    // const startDate = '2025-05-13T23:59'
+    // const endDate = '2025-05-14T23:59';      
 
     if( startDate && endDate ){
       if( startDate == endDate ){
@@ -32,8 +32,7 @@ $(document).ready(() => {
       }else{
         const idUnit = $("#unitsSelect").val();
         try {
-          // index_helper.getMessagesLoader(idUnit, startDate, endDate);          
-          index_helper.getMessagesLoader(idUnit, '2025-05-13T23:59', '2025-05-14T23:59');          
+          index_helper.getMessagesLoader(idUnit, startDate, endDate);          
         } catch (error) {
           alert("Error");
         }

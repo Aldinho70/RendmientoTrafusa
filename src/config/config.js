@@ -87,7 +87,7 @@ export const params = {
 
 /* Configuraciones del componente Navbar */
 export const Navbar = {
-    brand: 'Rendimiento de combustible',
+    brand: 'Rendimiento de combustible Ticsa-Trafusa',
     img_brand: './src/img/' + 'TicsaTrafusa_logo.png', /* brand principal */
     img_brand_2: './src/img/' + 'logojd.png',/* brand secundario */
     items: [
@@ -112,13 +112,6 @@ export const Footer = {
         { label: 'Política de privacidad', to: '/privacy' },
     ],
 }
-
-/**
- * KM RECORRIDOS  - ODOMETRO
- * LITROS CONSUMIDOS - TANQUES
- * Tiempos
- * velocidad
- */
 
 /**
  * USUARIO: DASHCOMB TRAFUSA
