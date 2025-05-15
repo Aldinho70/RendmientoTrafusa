@@ -115,12 +115,13 @@ class index_helper {
             Map.dibujarRecorrido(coordinates);
 
             if (sensor_fuel === 0) {
-                alert('Unidad sin datos de combustible');
+                Utils.showToast("Unidad sin datos de combustible", "Error", "danger");
                 this.generateHTMLInfo(`0`, '.kpis');
             } else {
-                if( !combustible_usage ){
-                    combustible_usage = (Performance.calcularConsumoReal(combustibles) / 10);
-                }
+                // if( !combustible_usage ){
+                    const combustiblesRegulados = Performance.suavizarCombustible( combustibles );
+                    combustible_usage = (Performance.calcularConsumoReal(combustiblesRegulados) / 10);
+                // }
 
                 const {
                     t: start,
@@ -132,7 +133,6 @@ class index_helper {
                 this.generateHTMLInfo(elapsedTime.formatted, '#tiempoViaje');
                 
                 if( combustibles.length ){
-                    console.log( combustibles );
                     
                     const start_combustible = combustibles[0].fuel;
                     this.generateHTMLInfo(`${(start_combustible)} Litros`, '#consumoInicial');
@@ -140,7 +140,7 @@ class index_helper {
                     const end_combustible = combustibles[combustibles.length - 1].fuel;
                     this.generateHTMLInfo(`${(end_combustible)} Litros`, '#consumoFinal');
     
-                    Highcharts.initChartLine(combustibles);
+                    Highcharts.initChartLine(combustiblesRegulados);
 
                     this.generateHTMLInfo(`${Math.round(combustible_usage)} Litros`, '#combustible_consumido');
     
@@ -150,7 +150,7 @@ class index_helper {
                     const rendimiento = Performance.calcularRendimiento(Math.round(totalKm), Math.round(combustible_usage));
                     this.generateHTMLInfo(`${rendimiento.toFixed(2)} km/l`, '#rendimiento');
                 }else{
-                    alert(`Error de lectura de sensor ${sensor_fuel.n}`);
+                    Utils.showToast(`Error de lectura de sensor ${sensor_fuel.n}`, "Error", "danger");
                 }
 
                 const totalStop = Speed.totalStops(speeds);
@@ -158,11 +158,9 @@ class index_helper {
 
                 const promedio = Speed.calcularPromedioVelocidad(speeds);
                 this.generateHTMLInfo(`${promedio.toFixed(2)} Km/h`, '#velocidadPromedio');
-
-
             }
         } else {
-            console.log('No hay mensajes');
+            Utils.showToast("No hay mensajes", "Error", "info");
         }
     }
     /* --------------------------------------------------- */

@@ -29,7 +29,7 @@ class Highchart {
    initChartLine(data) {
     const transformedData = data.map(item => [
         item.timestamp * 1000,  // Convertir timestamp a milisegundos
-        item.fuel
+        item.fuel_suavizado
     ]);
     console.log( transformedData );
     

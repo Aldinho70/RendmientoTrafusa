@@ -19,17 +19,21 @@ $(document).ready(() => {
   Highchart.initChart({ start_combustible: 1, end_combustible: 1 });
 
   $(`#searchButton`).button().click( () => {
-    const startDate = $(`#startDate`).val();    
-    const endDate = $(`#endDate`).val();  
+    // const startDate = $(`#startDate`).val();    
+    // const endDate = $(`#endDate`).val();      
+    const startDate = '2025-05-13T23:59'
+    const endDate = '2025-05-14T23:59';      
 
     if( startDate && endDate ){
       if( startDate == endDate ){
+        
         alert("Las fechas de inicio y fin no deben ser iguales.");
         return;
       }else{
         const idUnit = $("#unitsSelect").val();
         try {
-          index_helper.getMessagesLoader(idUnit, startDate, endDate);          
+          // index_helper.getMessagesLoader(idUnit, startDate, endDate);          
+          index_helper.getMessagesLoader(idUnit, '2025-05-13T23:59', '2025-05-14T23:59');          
         } catch (error) {
           alert("Error");
         }
