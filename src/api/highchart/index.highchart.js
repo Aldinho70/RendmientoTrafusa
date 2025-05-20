@@ -95,7 +95,53 @@ class Highchart {
             enabled: false  // No se necesita si no usa rangos fijos
         }
     });
-}
+    }
 
+    renderGraficaConsumoCarga(dataPorDia) {
+    const dias = dataPorDia.map(e => e.dia);
+    const cargas = dataPorDia.map(e => e.carga);
+    const consumos = dataPorDia.map(e => e.consumo);
+
+    Highcharts.chart('graficaConsumo', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Carga y Descarga de Combustible por Día'
+        },
+        xAxis: {
+            categories: dias,
+            title: { text: 'Fecha' }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Litros'
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' L'
+        },
+        plotOptions: {
+            column: {
+                grouping: true,
+                shadow: false
+            }
+        },
+        series: [
+            {
+                name: 'Carga',
+                data: cargas,
+                color: '#28a745'
+            },
+            {
+                name: 'Descarga',
+                data: consumos,
+                color: '#dc3545'
+            }
+        ]
+    });
+    }
 }
 export default new Highchart();
